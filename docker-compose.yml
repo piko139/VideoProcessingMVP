@@ -1,0 +1,65 @@
+services:
+  # PostgreSQL with pgvector extension
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: video_postgres_mvp
+    environment:
+      POSTGRES_DB: video_highlights
+      POSTGRES_USER: video_user
+      POSTGRES_PASSWORD: video_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - video_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U video_user -d video_highlights"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Python backend service
+  backend:
+    build: .
+    container_name: video_backend_mvp
+    ports:
+      - "8000:8000"
+      - "11434:11434"
+    volumes:
+      - ./uploads:/app/uploads
+    environment:
+      - DATABASE_URL=postgresql://video_user:video_pass@postgres:5432/video_highlights
+      - OLLAMA_HOST=http://localhost:11434
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - video_net
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  # Frontend
+  frontend:
+    build: ./frontend
+    container_name: video_frontend_mvp
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    networks:
+      - video_net
+
+volumes:
+  postgres_data:
+
+networks:
+  video_net:
+    driver: bridge

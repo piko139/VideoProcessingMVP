@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.env
+*.log
+app/data/database.db
+.DS_Store
+notebooks/.ipynb_checkpoints/
+.vscode/
+.idea/
+*.Identifier
+notebooks/.Trash-0/
+app/.ipynb_checkpoints/
+*.db

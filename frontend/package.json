@@ -1,0 +1,8 @@
+{
+  "name": "video-highlights-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for video highlights chat",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
+}
