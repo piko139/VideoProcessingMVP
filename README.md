@@ -42,7 +42,7 @@ User Query → Frontend → FastAPI Backend → Embedding Generator → Vector S
 ### 1. Clone Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/piko139/VideoProcessingMVP.git VideoProcessingMVP
 cd VideoProcessingMVP
 ```
 
