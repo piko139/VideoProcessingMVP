@@ -107,10 +107,10 @@ Open http://localhost:3000 in your browser to start asking questions about your 
   "highlights": [
     {
       "video_name": "MMS_ChallengesNASA.mp4",
-      "timestamp_start": 14.1,
-      "description": "Scientist explains magnetic reconnection process",
+      "timestamp_start": 10.1,
+      "description": "The speaker explains that magnetic reconnection is a process to get a 3D observation of this phenomenon.",
       "summary": "Key scientific explanation of plasma physics phenomenon",
-      "distance": 0.23
+      "distance": 0.35
     }
   ],
   "total_found": 1
